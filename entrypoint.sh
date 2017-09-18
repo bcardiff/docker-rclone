@@ -16,6 +16,13 @@ else
     echo "INFO: Add CRON=\"0 0 * * *\" to perform sync every midnight"
     /sync.sh
   else
+    if [ -z "$FORCE_SYNC" ]
+    then
+      echo "INFO: Add FORCE_SYNC=1 to perform a sync upon boot"
+    else
+      /sync.sh
+    fi
+
     # Setup cron schedule
     crontab -d
     echo "$CRON /sync.sh >>/tmp/sync.log 2>&1" > /config/crontab.tmp
