@@ -10,6 +10,7 @@ ENV SYNC_OPTS=-v
 ENV RCLONE_OPTS="--config /config/rclone.conf"
 ENV CRON=
 ENV FORCE_SYNC=
+ENV CHECK_URL=
 
 RUN apk -U add ca-certificates fuse wget dcron \
     && rm -rf /var/cache/apk/* \
