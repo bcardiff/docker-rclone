@@ -8,8 +8,9 @@ ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
 ENV RCLONE_OPTS="--config /config/rclone.conf"
+ENV CRON=
 
-RUN apk -U add ca-certificates fuse wget \
+RUN apk -U add ca-certificates fuse wget dcron \
     && rm -rf /var/cache/apk/* \
     && cd /tmp \
     && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \

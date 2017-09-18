@@ -2,6 +2,8 @@
 
 set -e
 
+echo "INFO: Starting sync.sh $(date)"
+
 if test "$(rclone ls $SYNC_SRC $RCLONE_OPTS)"; then
   # the source directory is not empty
   # it can be synced without clear data loss
