@@ -9,6 +9,7 @@ ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
 ENV RCLONE_OPTS="--config /config/rclone.conf"
 ENV CRON=
+ENV CRON_ABORT=
 ENV FORCE_SYNC=
 ENV CHECK_URL=
 
@@ -22,6 +23,7 @@ RUN apk -U add ca-certificates fuse wget dcron \
 
 COPY entrypoint.sh /
 COPY sync.sh /
+COPY sync-abort.sh /
 
 VOLUME ["/config"]
 

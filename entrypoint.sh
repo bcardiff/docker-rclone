@@ -2,6 +2,8 @@
 
 set -e
 
+rm -f /tmp/sync.pid
+
 if [ -z "$SYNC_SRC" ] || [ -z "$SYNC_DEST" ]
 then
   echo "INFO: No SYNC_SRC and SYNC_DEST found. Starting rclone config"
@@ -26,6 +28,12 @@ else
     # Setup cron schedule
     crontab -d
     echo "$CRON /sync.sh >>/tmp/sync.log 2>&1" > /config/crontab.tmp
+    if [ -z "$CRON_ABORT" ]
+    then
+      echo "INFO: Add CRON_ABORT=\"0 6 * * *\" to cancel outstanding sync at 6am"
+    else
+      echo "$CRON_ABORT /sync-abort.sh >>/tmp/sync.log 2>&1" >> /config/crontab.tmp
+    fi
     crontab /config/crontab.tmp
     rm /config/crontab.tmp
 

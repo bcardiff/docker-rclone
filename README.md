@@ -42,12 +42,13 @@ A couple of environment variables allows you to customize the behavior of the sy
 * `SYNC_SRC` source location for `rclone sync` command
 * `SYNC_DEST` destination location for `rclone sync` command
 * `CRON` crontab schedule `0 0 * * *` to perform sync every midnight
+* `CRON_ABORT` crontab schedule `0 6 * * *` to abort sync at 6am
 * `FORCE_SYNC` set variable to perform a sync upon boot
 * `CHECK_URL` [healthchecks.io](https://healthchecks.io) url or similar cron monitoring to perform a `GET`
 * `SYNC_OPTS` additional options for sync. defaults to `-v`
 
 ```bash
-$ docker run --rm -it -v $(pwd)/config:/config -v /path/to/source:/source -e SYNC_SRC="/source" -e SYNC_DEST="dest:path" -e CRON="0 0 * * *" -e FORCE_SYNC=1 -e CHECK_URL=https://hchk.io/hchk_uuid bcardiff/rclone
+$ docker run --rm -it -v $(pwd)/config:/config -v /path/to/source:/source -e SYNC_SRC="/source" -e SYNC_DEST="dest:path" -e CRON="0 0 * * *" -e CRON_ABORT="0 6 * * *" -e FORCE_SYNC=1 -e CHECK_URL=https://hchk.io/hchk_uuid bcardiff/rclone
 ```
 
 See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest syntax and additional options.
