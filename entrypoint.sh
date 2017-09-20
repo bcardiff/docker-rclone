@@ -33,15 +33,15 @@ else
 
     # Setup cron schedule
     crontab -d
-    echo "$CRON /sync.sh >>/tmp/sync.log 2>&1" > /config/crontab.tmp
+    echo "$CRON /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
     if [ -z "$CRON_ABORT" ]
     then
       echo "INFO: Add CRON_ABORT=\"0 6 * * *\" to cancel outstanding sync at 6am"
     else
-      echo "$CRON_ABORT /sync-abort.sh >>/tmp/sync.log 2>&1" >> /config/crontab.tmp
+      echo "$CRON_ABORT /sync-abort.sh >>/tmp/sync.log 2>&1" >> /tmp/crontab.tmp
     fi
-    crontab /config/crontab.tmp
-    rm /config/crontab.tmp
+    crontab /tmp/crontab.tmp
+    rm /tmp/crontab.tmp
 
     # Start cron
     echo "INFO: Starting crond ..."
