@@ -39,7 +39,7 @@ $ docker run --rm -it -v $(pwd)/config:/config bcardiff/rclone
 
 A few environment variables allow you to customize the behavior of the sync:
 
-* `COMMAND` `rclone` command, e.g sync, copy, move.
+* `COMMAND` `rclone` command, e.g `sync`, `copy`, `move`.
 Defaults to `sync`
 * `SYNC_SRC` source location for `rclone sync` command
 * `SYNC_DEST` destination location for `rclone sync` command
