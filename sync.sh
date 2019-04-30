@@ -11,7 +11,7 @@ else
 
 echo $$ > /tmp/sync.pid
 
-if test "$(rclone ls $SYNC_SRC $RCLONE_OPTS)"; then
+if test "$(rclone ls --max-depth 1 $SYNC_SRC $RCLONE_OPTS)"; then
   # the source directory is not empty
   # it can be synced without clear data loss
   echo "INFO: Starting rclone sync $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
