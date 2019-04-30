@@ -15,9 +15,14 @@ ENV CHECK_URL=
 ENV TZ=
 
 RUN apk -U add ca-certificates fuse wget dcron tzdata \
-    && rm -rf /var/cache/apk/* \
-    && cd /tmp \
-    && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
+    && rm -rf /var/cache/apk/*
+
+RUN if [ "$RCLONE_VERSION" = "current" ] ; \
+    then cd /tmp && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
+    else cd /tmp && wget -q http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
+    fi
+
+RUN cd /tmp \
     && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
     && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
     && rm -r /tmp/rclone*
