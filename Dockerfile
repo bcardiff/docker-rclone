@@ -1,6 +1,6 @@
 FROM alpine:3.5
 
-MAINTAINER Brian J. Cardiff <bcardiff@gmail.com>
+LABEL maintainer="Brian J. Cardiff <bcardiff@gmail.com>"
 
 ARG RCLONE_VERSION=current
 ARG ARCH=amd64
