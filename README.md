@@ -1,7 +1,5 @@
 # docker-rclone
 
-**Credit to Brian J. Cardiff for the orginal project @ https://github.com/bcardiff/docker-rclone**
-
 Docker image to perform a [rclone](http://rclone.org) sync based on a cron schedule, with [healthchecks.io](https://healthchecks.io) monitoring.
 
 rclone is a command line program to sync files and directories to and from:
@@ -60,3 +58,6 @@ $ docker run --rm -it -v $(pwd)/config:/config -v /path/to/source:/source -e SYN
 ```
 
 See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest syntax and additional options.
+
+
+**Credit to Brian J. Cardiff for the orginal project @ https://github.com/bcardiff/docker-rclone**
