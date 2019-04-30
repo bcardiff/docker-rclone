@@ -1,13 +1,17 @@
-FROM alpine:3.5
+FROM alpine:3.9
 
-MAINTAINER Brian J. Cardiff <bcardiff@gmail.com>
+MAINTAINER pfidr
 
-ENV RCLONE_VERSION=current
-ENV ARCH=amd64
+ARG RCLONE_VERSION=current
+ARG ARCH=amd64
 ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
+ENV RCLONE_CMD=sync
+ENV RCLONE_DIR_CMD=ls
+ENV RCLONE_DIR_CHECK_SKIP=
 ENV RCLONE_OPTS="--config /config/rclone.conf"
+ENV OUTPUT_LOG=
 ENV CRON=
 ENV CRON_ABORT=
 ENV FORCE_SYNC=
@@ -15,9 +19,14 @@ ENV CHECK_URL=
 ENV TZ=
 
 RUN apk -U add ca-certificates fuse wget dcron tzdata \
-    && rm -rf /var/cache/apk/* \
-    && cd /tmp \
-    && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
+    && rm -rf /var/cache/apk/*
+
+RUN if [ "$RCLONE_VERSION" = "current" ] ; \
+    then cd /tmp && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
+    else cd /tmp && wget -q http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
+    fi
+
+RUN cd /tmp \
     && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
     && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
     && rm -r /tmp/rclone*
@@ -27,6 +36,7 @@ COPY sync.sh /
 COPY sync-abort.sh /
 
 VOLUME ["/config"]
+VOLUME ["/logs"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
