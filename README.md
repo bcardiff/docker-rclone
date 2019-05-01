@@ -1,4 +1,4 @@
-# docker-rclone
+# docker-rclone [![Build Status](https://travis-ci.org/bcardiff/docker-rclone.svg?branch=master)](https://travis-ci.org/bcardiff/docker-rclone)
 
 Docker image to perform a [rclone](http://rclone.org) sync based on a cron schedule, with [healthchecks.io](https://healthchecks.io) monitoring.
 
