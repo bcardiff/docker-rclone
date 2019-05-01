@@ -49,6 +49,7 @@ A few environment variables allow you to customize the behavior of the sync:
 * `CRON_ABORT` crontab schedule `0 6 * * *` to abort sync at 6am
 * `FORCE_SYNC` set variable to perform a sync upon boot
 * `CHECK_URL` [healthchecks.io](https://healthchecks.io) url or similar cron monitoring to perform a `GET` after a successful sync
+* `FAIL_URL` Fail URL to perform a `GET` after unsuccessful execution. By default this is `CHECK_URL` with appended "/fail" at the end
 * `SYNC_OPTS` additional options for `rclone sync` command. Defaults to `-v`
 * `OUTPUT_LOG` set variable to output log file to /logs
 * `TZ` set the [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to use for the cron and log `America/Chicago`

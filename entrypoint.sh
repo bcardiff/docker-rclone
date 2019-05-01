@@ -50,6 +50,13 @@ then
 else
   # SYNC_SRC and SYNC_DEST setup
   # run sync either once or in cron depending on CRON
+
+  #Create fail URL if CHECK_URL is populated but FAIL_URL is not 
+  if [ ! -z "$CHECK_URL" ] && [ -z "$FAIL_URL" ]
+  then
+    FAIL_URL="${CHECK_URL}/fail"
+  fi
+
   if [ -z "$CRONS" ]
   then
     echo "INFO: No CRON setting found. Running sync once."

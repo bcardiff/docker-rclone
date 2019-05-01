@@ -21,9 +21,11 @@ else
       echo "INFO: Log file output to $LOG_FILE"
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}
+      export RETURN_CODE=$?
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
+      export RETURN_CODE=$?
     fi
   else
     if test "$(rclone $RCLONE_DIR_CMD $SYNC_SRC $RCLONE_OPTS)"; then
@@ -35,15 +37,22 @@ else
       echo "INFO: Log file output to $LOG_FILE"
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}
+      export RETURN_CODE=$?
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
+      export RETURN_CODE=$?
     fi
       if [ -z "$CHECK_URL" ]
+      then
+        echo "INFO: Define CHECK_URL with https://healthchecks.io to monitor $RCLONE_CMD job"
+      else
+        if [ "$RETURN_CODE" == 0 ]
         then
-          echo "INFO: Define CHECK_URL with https://healthchecks.io to monitor $RCLONE_CMD job"
-        else
           wget $CHECK_URL -O /dev/null
+        else
+          wget $FAIL_URL -O /dev/null
+        fi
       fi
     else
       echo "WARNING: Source directory is empty. Skipping $RCLONE_CMD command."
