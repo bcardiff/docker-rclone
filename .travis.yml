@@ -1,0 +1,6 @@
+language: bash
+
+before_script: cd test
+script:
+  - shellcheck -x shunit2 test.sh
+  - ./test.sh

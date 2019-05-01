@@ -1,9 +1,10 @@
-FROM alpine:3.5
+ARG BASE=alpine:3.9
+FROM ${BASE}
 
-MAINTAINER Brian J. Cardiff <bcardiff@gmail.com>
+LABEL maintainer="Brian J. Cardiff <bcardiff@gmail.com>"
 
-ENV RCLONE_VERSION=current
-ENV ARCH=amd64
+ARG RCLONE_VERSION=current
+ARG ARCH=amd64
 ENV SYNC_SRC=
 ENV SYNC_DEST=
 ENV SYNC_OPTS=-v
@@ -17,12 +18,15 @@ ENV TZ=
 ENV COMMAND=sync
 
 RUN apk -U add ca-certificates fuse wget dcron tzdata \
-    && rm -rf /var/cache/apk/* \
-    && cd /tmp \
-    && wget -q http://downloads.rclone.org/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-    && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
-    && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
-    && rm -r /tmp/rclone*
+  && rm -rf /var/cache/apk/*
+
+RUN URL=http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
+  URL=${URL/\/current/} ; \
+  cd /tmp \
+  && wget -q $URL \
+  && unzip /tmp/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip \
+  && mv /tmp/rclone-*-linux-${ARCH}/rclone /usr/bin \
+  && rm -r /tmp/rclone*
 
 COPY entrypoint.sh /
 COPY sync.sh /
