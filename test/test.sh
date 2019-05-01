@@ -7,7 +7,7 @@ oneTimeSetUp() {
 }
 
 oneTimeTearDown() {
-  docker rmi $(docker image ls -q rclone-test*) > /dev/null
+  docker rmi "$(docker image ls -q rclone-test*)" > /dev/null
 }
 
 setUp() {
