@@ -37,12 +37,12 @@ $ docker run --rm -it -v $(pwd)/config:/config pfidr34/rclone
 
 ### Perform sync in a daily basis
 
-A few environment variables allow you to customize the behavior of the sync:
+A few environment variables allow you to customize the behavior of rclone:
 
-* `SYNC_SRC` source location for `rclone sync/copy` command
-* `SYNC_DEST` destination location for `rclone sync/copy` command
-* `SYNC_OPTS` additional options for `rclone sync/copy` command. Defaults to `-v`
-* `RCLONE_CMD` set variable to `sync` or `copy` when running rclone. Defaults to `sync`
+* `SYNC_SRC` source location for `rclone sync/copy/move` command
+* `SYNC_DEST` destination location for `rclone sync/copy/move` command
+* `SYNC_OPTS` additional options for `rclone sync/copy/move` command. Defaults to `-v`
+* `RCLONE_CMD` set variable to `sync` `copy` or `move`  when running rclone. Defaults to `sync`
 * `RCLONE_DIR_CMD` set variable to `ls` or `lsf` for source directory check style. Defaults to `ls`
 * `RCLONE_DIR_CHECK_SKIP` set variable to skip source directory check before sync. *Use with caution*
 * `CRON` crontab schedule `0 0 * * *` to perform sync every midnight. Also supprorts cron shortcuts: `@yearly` `@monthly` `@weekly` `@daily` `@hourly`

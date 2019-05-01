@@ -6,9 +6,9 @@ set -e
 echo "INFO: Running $(rclone --version | head -n 1)"
 
 # Make sure sync/copy command is ok
-if [ "$(echo "$RCLONE_CMD" | tr '[:lower:]' '[:upper:]')" != "SYNC" ] && [ "$(echo "$RCLONE_CMD" | tr '[:lower:]' '[:upper:]')" != "COPY" ]
+if [ "$(echo "$RCLONE_CMD" | tr '[:lower:]' '[:upper:]')" != "SYNC" ] && [ "$(echo "$RCLONE_CMD" | tr '[:lower:]' '[:upper:]')" != "COPY" ] && [ "$(echo "$RCLONE_CMD" | tr '[:lower:]' '[:upper:]')" != "MOVE" ]
 then
-  echo "WARNING: rclone command '$RCLONE_CMD' is not supported by this container, please use sync or copy. Stopping."
+  echo "WARNING: rclone command '$RCLONE_CMD' is not supported by this container, please use sync/copy/move. Stopping."
   exit 1
 fi
 
