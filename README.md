@@ -52,6 +52,7 @@ A few environment variables allow you to customize the behavior of rclone:
 * `FAIL_URL` Fail URL to perform a `GET` after unsuccessful execution. By default this is `CHECK_URL` with appended "/fail" at the end
 * `SYNC_OPTS` additional options for `rclone sync` command. Defaults to `-v`
 * `OUTPUT_LOG` set variable to output log file to /logs
+* `ROTATE_LOG` set variable to delete logs older than specified days from /logs
 * `TZ` set the [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to use for the cron and log `America/Chicago`
 
 ```bash
