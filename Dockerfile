@@ -1,4 +1,5 @@
-FROM alpine:3.5
+ARG BASE=alpine:3.9
+FROM ${BASE}
 
 LABEL maintainer="Brian J. Cardiff <bcardiff@gmail.com>"
 
