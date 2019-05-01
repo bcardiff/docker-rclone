@@ -18,10 +18,14 @@ setUp() {
 testCanBuildSpecificVersion() {
   docker build $DOCKER_BUILD_OPTS --build-arg RCLONE_VERSION=v1.45 -t rclone-test-1.45 .. > /dev/null
   assertEquals $? 0
+  docker run --rm --entrypoint= rclone-test-1.45 rclone --version
+  assertEquals $? 0
 }
 
 testCanBuildCurrentVersion() {
   docker build $DOCKER_BUILD_OPTS --build-arg RCLONE_VERSION=current -t rclone-test-current .. > /dev/null
+  assertEquals $? 0
+  docker run --rm --entrypoint= rclone-test-current rclone --version
   assertEquals $? 0
 }
 
