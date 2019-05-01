@@ -6,6 +6,10 @@ oneTimeSetUp() {
   docker build $DOCKER_BUILD_OPTS -t rclone-test .. > /dev/null
 }
 
+oneTimeTearDown() {
+  docker rmi $(docker image ls -q rclone-test*) > /dev/null
+}
+
 setUp() {
   rm -rf dest
   mkdir dest
