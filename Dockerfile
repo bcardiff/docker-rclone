@@ -1,4 +1,4 @@
-ARG BASE=alpine:3.9
+ARG BASE=alpine:latest
 FROM ${BASE}
 
 LABEL maintainer="pfidr"
