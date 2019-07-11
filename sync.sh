@@ -27,7 +27,7 @@ if test "$(rclone ls --max-depth 1 $SYNC_SRC $RCLONE_OPTS)"; then
   # it can be synced without clear data loss
   echo "INFO: Starting rclone sync $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
   rclone sync $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
-  
+
   # Send "done" ping to HC, if set
   if [ -z "$CHECK_URL" ]
   then
