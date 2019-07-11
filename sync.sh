@@ -13,7 +13,7 @@ echo $$ > /tmp/sync.pid
 
 if test "$(rclone ls --max-depth 1 $SYNC_SRC $RCLONE_OPTS)"; then
   # Send a start ping if a) START_URL is explicitly set OR b) if Healthchecks.io is used as CHECK_URL provider
-  if [ -z ${START_URL} ]
+  if [ -z ${START_URL+x} ]
   then
     if echo "$CHECK_URL" | grep "hc-ping"
     then
