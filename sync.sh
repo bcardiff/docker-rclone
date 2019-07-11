@@ -12,10 +12,15 @@ else
 echo $$ > /tmp/sync.pid
 
 if test "$(rclone ls --max-depth 1 $SYNC_SRC $RCLONE_OPTS)"; then
-  # Send "start" ping to HC, if set 
-  if [ -n "$CHECK_URL" ]
+  # Send a start ping if a) START_URL is explicitly set OR b) if Healthchecks.io is used as CHECK_URL provider
+  if [ -z ${START_URL+x} ]
   then
-    wget "${CHECK_URL}/start" -O /dev/null
+    if echo "$CHECK_URL" | grep "hc-ping"
+    then
+      wget "${CHECK_URL}/start" -O /dev/null
+    fi
+  else
+    wget $START_URL -O /dev/null
   fi
     
   # the source directory is not empty
