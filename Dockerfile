@@ -21,8 +21,7 @@ ENV CHECK_URL=
 ENV FAIL_URL=
 ENV TZ=
 
-RUN apk -U add ca-certificates fuse wget dcron tzdata \
-  && rm -rf /var/cache/apk/*
+RUN apk --no-cache add ca-certificates fuse wget dcron tzdata
 
 RUN URL=http://downloads.rclone.org/${RCLONE_VERSION}/rclone-${RCLONE_VERSION}-linux-${ARCH}.zip ; \
   URL=${URL/\/current/} ; \
