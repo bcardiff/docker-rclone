@@ -8,7 +8,7 @@ echo "INFO: Starting sync.sh pid $$ $(date)"
 if [ ! -z "${ROTATE_LOG##*[!0-9]*}" ]
 then
   echo "INFO: Removing logs older than $ROTATE_LOG day(s)..."
-  find /logs/*.txt -mtime +$ROTATE_LOG -type f -delete
+  test -d /logs/*.txt && find /logs/*.txt -mtime +$ROTATE_LOG -type f -delete
 fi
 
 if [ `lsof | grep $0 | wc -l | tr -d ' '` -gt 1 ]
