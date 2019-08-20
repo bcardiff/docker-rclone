@@ -26,10 +26,20 @@ else
       d=$(date +%Y_%m_%d-%H_%M_%S)
       LOG_FILE="/logs/$d.txt"
       echo "INFO: Log file output to $LOG_FILE"
+      if [ ! -z "$CHECK_URL" ]
+      then
+        echo "INFO: Sending start signal to healthchecks.io"
+        wget $CHECK_URL/start -O /dev/null
+      fi
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}
       export RETURN_CODE=$?
     else
+      if [ ! -z "$CHECK_URL" ]
+      then
+        echo "INFO: Sending start signal to healthchecks.io"
+        wget $CHECK_URL/start -O /dev/null
+      fi
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
       export RETURN_CODE=$?
@@ -42,11 +52,21 @@ else
       d=$(date +%Y_%m_%d-%H_%M_%S)
       LOG_FILE="/logs/$d.txt"
       echo "INFO: Log file output to $LOG_FILE"
+      if [ ! -z "$CHECK_URL" ]
+      then
+        echo "INFO: Sending start signal to healthchecks.io"
+        wget $CHECK_URL/start -O /dev/null
+      fi
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}"
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}
       export RETURN_CODE=$?
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
+      if [ ! -z "$CHECK_URL" ]
+      then
+        echo "INFO: Sending start signal to healthchecks.io"
+        wget $CHECK_URL/start -O /dev/null
+      fi
       rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
       export RETURN_CODE=$?
     fi
@@ -56,8 +76,10 @@ else
       else
         if [ "$RETURN_CODE" == 0 ]
         then
+          echo "INFO: Seding complete signal to healthchecks.io"
           wget $CHECK_URL -O /dev/null
         else
+          echo "INFO: Seding failure signal to healthchecks.io"
           wget $FAIL_URL -O /dev/null
         fi
       fi
