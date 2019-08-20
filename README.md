@@ -61,5 +61,22 @@ $ docker run --rm -it -v $(pwd)/config:/config -v /path/to/source:/source -e SYN
 
 See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest syntax and additional options.
 
+## Changelog
 
-**Credit to Brian J. Cardiff for the orginal project @ https://github.com/bcardiff/docker-rclone**
++ **08/20/2019:**
+  * Add start command for healthchecks.io calls
+  * Add debug messages for healthchecks.io calls
++ **08/19/2019:**
+  * Correct log rotation when there are no logs
++ **07/18/2019:**
+  * Optimizations to dockerfile
++ **06/22/2019:**
+  * Update to latest Rclone (v1.48.0)
++ **05/01/2019:**
+  * Initial release
+
+<br />
+<br />
+<br />
+<br />
+Credit to Brian J. Cardiff for the orginal project @ https://github.com/bcardiff/docker-rclone
