@@ -63,6 +63,8 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **08/29/2019:**
+  * Update to latest Rclone (v1.49.1)
 + **08/20/2019:**
   * Add start command for healthchecks.io calls
   * Add debug messages for healthchecks.io calls
