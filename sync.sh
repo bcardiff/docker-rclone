@@ -18,6 +18,10 @@ else
 
   echo $$ > /tmp/sync.pid
 
+  SYNC_OPTS_EVALUALTED=$(eval echo $SYNC_OPTS_EVAL)
+  echo "INFO: Evaluated SYNC_OPTS_EVAL to:${SYNC_OPTS_EVALUALTED}"
+  SYNC_OPTS_ALL="${SYNC_OPTS} ${SYNC_OPTS_EVALUALTED}"
+
   if [ ! -z "$RCLONE_DIR_CHECK_SKIP" ]
   then
     echo "INFO: Skipping source directory check..."
@@ -31,8 +35,8 @@ else
         echo "INFO: Sending start signal to healthchecks.io"
         wget $CHECK_URL/start -O /dev/null
       fi
-      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}"
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}
+      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
+      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
       export RETURN_CODE=$?
     else
       if [ ! -z "$CHECK_URL" ]
@@ -40,8 +44,8 @@ else
         echo "INFO: Sending start signal to healthchecks.io"
         wget $CHECK_URL/start -O /dev/null
       fi
-      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
+      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
+      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL
       export RETURN_CODE=$?
     fi
   else
@@ -57,17 +61,17 @@ else
         echo "INFO: Sending start signal to healthchecks.io"
         wget $CHECK_URL/start -O /dev/null
       fi
-      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}"
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS --log-file=${LOG_FILE}
+      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
+      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
       export RETURN_CODE=$?
     else
-      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS"
+      echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       if [ ! -z "$CHECK_URL" ]
       then
         echo "INFO: Sending start signal to healthchecks.io"
         wget $CHECK_URL/start -O /dev/null
       fi
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS
+      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL
       export RETURN_CODE=$?
     fi
       if [ -z "$CHECK_URL" ]
