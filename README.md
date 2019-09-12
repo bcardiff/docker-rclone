@@ -64,7 +64,7 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
-+ **08/29/2019:**
++ **09/13/2019:**
   * Add environment variable SYNC_OPTS_EVAL.
 + **08/29/2019:**
   * Update to latest Rclone (v1.49.1)
