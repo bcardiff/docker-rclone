@@ -42,6 +42,7 @@ A few environment variables allow you to customize the behavior of rclone:
 * `SYNC_SRC` source location for `rclone sync/copy/move` command
 * `SYNC_DEST` destination location for `rclone sync/copy/move` command
 * `SYNC_OPTS` additional options for `rclone sync/copy/move` command. Defaults to `-v`
+* `SYNC_OPTS_EVAL` further additional options for `rclone sync/copy/move` command. The variables and commands in the string are first interpolated like in a shell. The interpolated string is appended to SYNC_OPTS. That means '--backup-dir /old\`date -I\`' first evaluates to '--backup-dir /old2019-09-12', which is then appended to SYNC_OPTS. The evaluation happens immediately before rclone is called.
 * `RCLONE_CMD` set variable to `sync` `copy` or `move`  when running rclone. Defaults to `sync`
 * `RCLONE_DIR_CMD` set variable to `ls` or `lsf` for source directory check style. Defaults to `ls`
 * `RCLONE_DIR_CHECK_SKIP` set variable to skip source directory check before sync. *Use with caution*
@@ -63,6 +64,8 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **08/29/2019:**
+  * Add environment variable SYNC_OPTS_EVAL.
 + **08/29/2019:**
   * Update to latest Rclone (v1.49.1)
 + **08/20/2019:**
