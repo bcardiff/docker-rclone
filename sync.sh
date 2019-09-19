@@ -18,9 +18,14 @@ else
 
   echo $$ > /tmp/sync.pid
 
-  SYNC_OPTS_EVALUALTED=$(eval echo $SYNC_OPTS_EVAL)
-  echo "INFO: Evaluated SYNC_OPTS_EVAL to:${SYNC_OPTS_EVALUALTED}"
-  SYNC_OPTS_ALL="${SYNC_OPTS} ${SYNC_OPTS_EVALUALTED}"
+  if [ ! -z "$SYNC_OPTS_EVAL" ]
+  then
+    SYNC_OPTS_EVALUALTED=$(eval echo $SYNC_OPTS_EVAL)
+    echo "INFO: Evaluated SYNC_OPTS_EVAL to: ${SYNC_OPTS_EVALUALTED}"
+    SYNC_OPTS_ALL="${SYNC_OPTS} ${SYNC_OPTS_EVALUALTED}"
+  else
+    SYNC_OPTS_ALL="${SYNC_OPTS}"
+  fi
 
   if [ ! -z "$RCLONE_DIR_CHECK_SKIP" ]
   then
