@@ -70,6 +70,12 @@ else
       /sync.sh
     fi
 
+    if [ ! -z "$SYNC_ONCE" ]
+    then
+      echo "INFO: SYNC_ONCE option activated. Stopping now."
+      exit 0
+    fi
+
     # Setup cron schedule
     crontab -d
     echo "$CRONS /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
