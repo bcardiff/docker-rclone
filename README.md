@@ -69,6 +69,14 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
   * Add environment variable SYNC_ONCE.
 + **09/13/2019:**
   * Add environment variable SYNC_OPTS_EVAL.
++ **09/19/2019:**
+  * Add environment variable SYNC_OPTS_EVAL
++ **09/17/2019:**
+  * Update to latest Rclone (v1.49.3)
++ **09/10/2019:**
+  * Regression on log rotation 
++ **09/09/2019:**
+  * Update to latest Rclone (v1.49.2)
 + **08/29/2019:**
   * Update to latest Rclone (v1.49.1)
 + **08/20/2019:**
