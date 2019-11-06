@@ -65,6 +65,8 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **11/06/2019:**
+  * Update to latest Rclone (v1.50.1)
 + **10/27/2019:**
   * Update to latest Rclone (v1.50.0)
 + **10/07/2019:**
