@@ -113,7 +113,7 @@ else
 
     # Setup cron schedule
     crontab -d
-    echo "$CRONS su "$USER" -c /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
+    echo "$CRONS su $USER -c /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
     if [ -z "$CRON_ABORT" ]
     then
       echo "INFO: Add CRON_ABORT=\"0 6 * * *\" to cancel outstanding sync at 6am"
