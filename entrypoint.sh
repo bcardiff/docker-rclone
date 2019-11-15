@@ -30,18 +30,19 @@ fi
 if [ ! -z "$GID" ] 
 then
 
-  #Get group name or add it!
+  #Get group name or add it
   GROUP=$(getent group "$GID" | cut -d: -f1)
-  USER=rclone
   if [ -z "$GROUP" ] 
   then
-    GROUP="rclone"
+    GROUP=rclone
     addgroup --gid "$GID" "$GROUP"
   fi
 
-  #check if it already exists
-  if [ ! $(getent passwd "$UID") ]
+  #get user or add it
+  USER=$(getent passwd "$UID" | cut -d: -f1)
+  if [ -z "$USER" ]
   then 
+    USER=rclone
     adduser \
       --disabled-password \
       --gecos "" \
@@ -51,7 +52,7 @@ then
       "$USER" >/dev/null
   fi
 else
-  USER="root"
+  USER=$(whoami)
 fi
 
 # Re-write cron shortcut
