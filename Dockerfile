@@ -22,6 +22,8 @@ ENV FORCE_SYNC=
 ENV CHECK_URL=
 ENV FAIL_URL=
 ENV TZ=
+ENV UID=
+ENV GID=
 
 RUN apk --no-cache add ca-certificates fuse wget dcron tzdata
 

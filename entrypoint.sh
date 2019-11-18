@@ -19,6 +19,42 @@ then
   exit 1
 fi
 
+# Make sure UID and GID are both supplied
+if [ -z "$GID" -a ! -z "$UID" ] || [ -z "$UID" -a ! -z "$GID" ]
+then 
+  echo "WARNING: Must supply both UID and GID or neither. Stopping."
+  exit 1
+fi
+
+# Process UID and GID
+if [ ! -z "$GID" ] 
+then
+
+  #Get group name or add it
+  GROUP=$(getent group "$GID" | cut -d: -f1)
+  if [ -z "$GROUP" ] 
+  then
+    GROUP=rclone
+    addgroup --gid "$GID" "$GROUP"
+  fi
+
+  #get user or add it
+  USER=$(getent passwd "$UID" | cut -d: -f1)
+  if [ -z "$USER" ]
+  then 
+    USER=rclone
+    adduser \
+      --disabled-password \
+      --gecos "" \
+      --no-create-home \
+      --ingroup "$GROUP" \
+      --uid "$UID" \
+      "$USER" >/dev/null
+  fi
+else
+  USER=$(whoami)
+fi
+
 # Re-write cron shortcut
 case "$(echo "$CRON" | tr '[:lower:]' '[:upper:]')" in
     *@YEARLY* ) echo "INFO: Cron shortcut $CRON re-written to 0 0 1 1 *" && CRONS="0 0 1 1 *";;
@@ -45,7 +81,7 @@ rm -f /tmp/sync.pid
 if [ -z "$SYNC_SRC" ] || [ -z "$SYNC_DEST" ]
 then
   echo "INFO: No SYNC_SRC and SYNC_DEST found. Starting rclone config"
-  rclone config $RCLONE_OPTS
+  su "$USER" -c "rclone config $RCLONE_OPTS"
   echo "INFO: Define SYNC_SRC and SYNC_DEST to start sync process."
 else
   # SYNC_SRC and SYNC_DEST setup
@@ -61,13 +97,13 @@ else
   then
     echo "INFO: No CRON setting found. Running sync once."
     echo "INFO: Add CRON=\"0 0 * * *\" to perform sync every midnight"
-    /sync.sh
+    su "$USER" -c /sync.sh
   else
     if [ -z "$FORCE_SYNC" ]
     then
       echo "INFO: Add FORCE_SYNC=1 to perform a sync upon boot"
     else
-      /sync.sh
+      su "$USER" -c /sync.sh
     fi
 
     if [ ! -z "$SYNC_ONCE" ]
@@ -78,7 +114,7 @@ else
 
     # Setup cron schedule
     crontab -d
-    echo "$CRONS /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
+    echo "$CRONS su $USER -c /sync.sh >>/tmp/sync.log 2>&1" > /tmp/crontab.tmp
     if [ -z "$CRON_ABORT" ]
     then
       echo "INFO: Add CRON_ABORT=\"0 6 * * *\" to cancel outstanding sync at 6am"
