@@ -56,6 +56,10 @@ A few environment variables allow you to customize the behavior of rclone:
 * `OUTPUT_LOG` set variable to output log file to /logs
 * `ROTATE_LOG` set variable to delete logs older than specified days from /logs
 * `TZ` set the [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to use for the cron and log `America/Chicago`
+* `UID` set variable to specify user to run rclone as. Must also use GID.
+* `GID` set variable to specify group to run rclone as. Must also use UID.
+
+**When using UID/GID the config and/or logs directory must be writeable by this UID**
 
 ```bash
 $ docker run --rm -it -v $(pwd)/config:/config -v /path/to/source:/source -e SYNC_SRC="/source" -e SYNC_DEST="dest:path" -e TZ="America/Chicago" -e CRON="0 0 * * *" -e CRON_ABORT="0 6 * * *" -e FORCE_SYNC=1 -e CHECK_URL=https://hchk.io/hchk_uuid pfidr34/rclone
@@ -65,6 +69,8 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **11/18/2019:**
+  * Add support for UID/GID
 + **11/06/2019:**
   * Update to latest Rclone (v1.50.1)
 + **10/27/2019:**
