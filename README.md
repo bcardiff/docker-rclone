@@ -69,6 +69,8 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **11/20/2019:**
+  * Update to latest Rclone (v1.50.2)
 + **11/18/2019:**
   * Add support for UID/GID
 + **11/06/2019:**
