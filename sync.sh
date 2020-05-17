@@ -41,7 +41,7 @@ else
         wget $CHECK_URL/start -O /dev/null
       fi
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
+      rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
       export RETURN_CODE=$?
     else
       if [ ! -z "$CHECK_URL" ]
@@ -50,11 +50,11 @@ else
         wget $CHECK_URL/start -O /dev/null
       fi
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL
+      rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL
       export RETURN_CODE=$?
     fi
   else
-    if test "$(rclone $RCLONE_DIR_CMD $SYNC_SRC $RCLONE_OPTS)"; then
+    if test "$(rclone $RCLONE_DIR_CMD "$(eval echo $SYNC_SRC)" $RCLONE_OPTS)"; then
     echo "INFO: Source directory is not empty and can be processed without clear loss of data"
     if [ ! -z "$OUTPUT_LOG" ]
     then
@@ -67,7 +67,7 @@ else
         wget $CHECK_URL/start -O /dev/null
       fi
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
+      rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
       export RETURN_CODE=$?
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
@@ -76,7 +76,7 @@ else
         echo "INFO: Sending start signal to healthchecks.io"
         wget $CHECK_URL/start -O /dev/null
       fi
-      rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL
+      rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL
       export RETURN_CODE=$?
     fi
       if [ -z "$CHECK_URL" ]
