@@ -45,7 +45,6 @@ else
       rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
       export RETURN_CODE=$?
       set -e
-      echo "DEBUG: RETURN CODE $RETURN_CODE"
     else
       if [ ! -z "$CHECK_URL" ]
       then
@@ -57,7 +56,6 @@ else
       rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL
       export RETURN_CODE=$?
       set -e
-      echo "DEBUG: RETURN CODE $RETURN_CODE"
     fi
   else
     if test "$(rclone $RCLONE_DIR_CMD "$(eval echo $SYNC_SRC)" $RCLONE_OPTS)"; then
@@ -77,7 +75,6 @@ else
       rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}
       export RETURN_CODE=$?
       set -e
-      echo "DEBUG: RETURN CODE $RETURN_CODE"
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       if [ ! -z "$CHECK_URL" ]
@@ -89,7 +86,6 @@ else
       rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL
       set -e
       export RETURN_CODE=$?
-      echo "DEBUG: RETURN CODE $RETURN_CODE"
     fi
       if [ -z "$CHECK_URL" ]
       then
