@@ -70,6 +70,7 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 ## Changelog
 
 + **05/27/2020:**
+  * Update to latest Rclone (v1.52.0)
   * Add `RCLONE_DIR_CMD_DEPTH` option to declare recursion depth when checking if `SYNC_SRC` is empty
   * Move call to signal start of healthchecks.io further up in the sync process
   * Change when logs are deleted to make sure an active log is not deleted
