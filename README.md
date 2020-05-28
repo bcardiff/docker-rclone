@@ -46,6 +46,7 @@ A few environment variables allow you to customize the behavior of rclone:
 * `SYNC_ONCE` set variable to only run the sync one time and then exit the container
 * `RCLONE_CMD` set variable to `sync` `copy` or `move`  when running rclone. Defaults to `sync`
 * `RCLONE_DIR_CMD` set variable to `ls` or `lsf` for source directory check style. Defaults to `ls`
+* `RCLONE_DIR_CMD_DEPTH` set the limit of the recursion depth to this. Defaults to `-1` (rclone default)
 * `RCLONE_DIR_CHECK_SKIP` set variable to skip source directory check before sync. *Use with caution*
 * `CRON` crontab schedule `0 0 * * *` to perform sync every midnight. Also supprorts cron shortcuts: `@yearly` `@monthly` `@weekly` `@daily` `@hourly`
 * `CRON_ABORT` crontab schedule `0 6 * * *` to abort sync at 6am
@@ -68,6 +69,12 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **05/27/2020:**
+  * Add `RCLONE_DIR_CMD_DEPTH` option to declare recursion depth when checking if `SYNC_SRC` is empty
+  * Move call to signal start of healthchecks.io further up in the sync process
+  * Change when logs are deleted to make sure an active log is not deleted
++ **05/18/2020:**
+  * Modify how rclone errors are interpreted when passing results to healthchecks.io
 + **05/17/2020:**
   * Handle spaces in `SYNC_SRC` and `SYNC_DEST`
 + **02/01/2020:**
