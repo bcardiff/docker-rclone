@@ -21,18 +21,18 @@ fi
 
 # Make sure UID and GID are both supplied
 if [ -z "$GID" -a ! -z "$UID" ] || [ -z "$UID" -a ! -z "$GID" ]
-then 
+then
   echo "WARNING: Must supply both UID and GID or neither. Stopping."
   exit 1
 fi
 
 # Process UID and GID
-if [ ! -z "$GID" ] 
+if [ ! -z "$GID" ]
 then
 
   #Get group name or add it
   GROUP=$(getent group "$GID" | cut -d: -f1)
-  if [ -z "$GROUP" ] 
+  if [ -z "$GROUP" ]
   then
     GROUP=rclone
     addgroup --gid "$GID" "$GROUP"
@@ -41,7 +41,7 @@ then
   #get user or add it
   USER=$(getent passwd "$UID" | cut -d: -f1)
   if [ -z "$USER" ]
-  then 
+  then
     USER=rclone
     adduser \
       --disabled-password \
@@ -87,7 +87,7 @@ else
   # SYNC_SRC and SYNC_DEST setup
   # run sync either once or in cron depending on CRON
 
-  #Create fail URL if CHECK_URL is populated but FAIL_URL is not 
+  #Create fail URL if CHECK_URL is populated but FAIL_URL is not
   if [ ! -z "$CHECK_URL" ] && [ -z "$FAIL_URL" ]
   then
     FAIL_URL="${CHECK_URL}/fail"

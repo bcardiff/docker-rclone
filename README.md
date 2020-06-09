@@ -69,6 +69,9 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **06/28/2020:**
+  * Eval the entire rclone command
+  * Modify how rclone errors are interpreted when checking if source directory is empty
 + **05/27/2020:**
   * Update to latest Rclone (v1.52.0)
   * Add `RCLONE_DIR_CMD_DEPTH` option to declare recursion depth when checking if `SYNC_SRC` is empty
