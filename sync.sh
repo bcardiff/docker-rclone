@@ -45,13 +45,13 @@ else
       echo "INFO: Log file output to $LOG_FILE"
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
       set +e
-      eval "rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
+      eval "rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
       export RETURN_CODE=$?
       set -e
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       set +e
-      eval "rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL"
+      eval "rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       export RETURN_CODE=$?
       set -e
     fi
@@ -67,13 +67,13 @@ else
       echo "INFO: Log file output to $LOG_FILE"
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
       set +e
-      eval "rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
+      eval "rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
       export RETURN_CODE=$?
       set -e
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       set +e
-      eval "rclone $RCLONE_CMD "$(eval echo $SYNC_SRC)" "$(eval echo $SYNC_DEST)" $RCLONE_OPTS $SYNC_OPTS_ALL"
+      eval "rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       set -e
       export RETURN_CODE=$?
     fi
