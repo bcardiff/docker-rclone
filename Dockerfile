@@ -13,7 +13,9 @@ ENV CRON=
 ENV CRON_ABORT=
 ENV FORCE_SYNC=
 ENV CHECK_URL=
+ENV FAIL_URL=
 ENV TZ=
+ENV COMMAND=sync
 
 RUN apk -U add ca-certificates fuse wget dcron tzdata \
   && rm -rf /var/cache/apk/*
