@@ -89,11 +89,25 @@ else
   else
     if [ "$RETURN_CODE" == 0 ]
     then
-      echo "INFO: Sending complete signal to healthchecks.io"
-      wget $CHECK_URL -O /dev/null
+      if [ ! -z "$OUTPUT_LOG" ] && [ ! -z "$HC_LOG" ] && [ -f "$LOG_FILE" ]
+      then
+        echo "INFO: Sending complete signal with logs to healthchecks.io"
+        m=$(tail -c 10000 "$LOG_FILE")
+	wget $CHECK_URL -O /dev/null --post-data="$m"
+      else
+	echo "INFO: Sending complete signal to healthchecks.io"
+        wget $CHECK_URL -O /dev/null --post-data="SUCCESS"
+      fi
     else
-      echo "INFO: Sending failure signal to healthchecks.io"
-      wget $FAIL_URL -O /dev/null
+      if [ ! -z "$OUTPUT_LOG" ] && [ ! -z "$HC_LOG" ] && [ -f "$LOG_FILE" ]
+      then
+        echo "INFO: Sending failure signal with logs to healthchecks.io"
+        m=$(tail -c 10000 "$LOG_FILE")
+        wget $FAIL_URL -O /dev/null --post-data="$m"
+      else
+	echo "INFO: Sending failure signal to healthchecks.io"
+        wget $FAIL_URL -O /dev/null --post-data="Check container logs"
+      fi
     fi
   fi
 
