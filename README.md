@@ -70,6 +70,10 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **06/25/2021:**
+  * Update to latest Rclone (v1.55.1)
++ **06/25/2021:**
+  * Update to latest Rclone (v1.55.0)
 + **03/10/2021:**
   * Update to latest Rclone (v1.54.1)
 + **02/04/2021:**
