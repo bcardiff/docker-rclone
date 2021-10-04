@@ -26,4 +26,5 @@ docker build --no-cache --build-arg RCLONE_VERSION=v1.54.1 -t pfidr/rclone:1.54.
 docker build --no-cache --build-arg RCLONE_VERSION=v1.55.0 -t pfidr/rclone:1.55.0 .
 docker build --no-cache --build-arg RCLONE_VERSION=v1.55.1 -t pfidr/rclone:1.55.1 .
 docker build --no-cache --build-arg RCLONE_VERSION=v1.56.0 -t pfidr/rclone:1.56.0 .
-docker build --no-cache --build-arg RCLONE_VERSION=v1.56.1 -t pfidr/rclone:1.56.1 -t pfidr/rclone:latest -t pfidr/rclone:test -t rclone_test .
+docker build --no-cache --build-arg RCLONE_VERSION=v1.56.1 -t pfidr/rclone:1.56.1 .
+docker build --no-cache --build-arg RCLONE_VERSION=v1.56.2 -t pfidr/rclone:1.56.2 -t pfidr/rclone:latest -t pfidr/rclone:test -t rclone_test .
