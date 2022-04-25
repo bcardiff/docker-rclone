@@ -55,6 +55,7 @@ else
       export RETURN_CODE=$?
       set -e
     fi
+    echo "INFO: $RCLONE_CMD finished with return code: $RETURN_CODE"
   else
     set e+
     if test "$(rclone --max-depth $RCLONE_DIR_CMD_DEPTH $RCLONE_DIR_CMD "$(eval echo $SYNC_SRC)" $RCLONE_OPTS)"; then
@@ -70,12 +71,14 @@ else
       eval "rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL --log-file=${LOG_FILE}"
       export RETURN_CODE=$?
       set -e
+      echo "INFO: $RCLONE_CMD finished with return code: $RETURN_CODE"
     else
       echo "INFO: Starting rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
       set +e
       eval "rclone $RCLONE_CMD $SYNC_SRC $SYNC_DEST $RCLONE_OPTS $SYNC_OPTS_ALL"
-      set -e
       export RETURN_CODE=$?
+      set -e
+      echo "INFO: $RCLONE_CMD finished with return code: $RETURN_CODE"
     fi
     else
       echo "WARNING: Source directory is empty. Skipping $RCLONE_CMD command."
