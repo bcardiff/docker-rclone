@@ -70,6 +70,10 @@ See [rclone sync docs](https://rclone.org/commands/rclone_sync/) for source/dest
 
 ## Changelog
 
++ **04/25/2022:**
+  * Display exit code in console output
+  * Fix issue with healthcheck
+  * Update to latest Rclone (v1.58.0)
 + **11/18/2021:**
   * Update to latest Rclone (v1.57.0)
 + **10/04/2021:**
