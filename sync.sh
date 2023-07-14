@@ -88,7 +88,7 @@ else
   then
     echo "INFO: Define CHECK_URL with https://healthchecks.io to monitor $RCLONE_CMD job"
   else
-    if [ "$RETURN_CODE" == 0 ]
+    if [[ "$SUCCESS_CODES" =~ "$RETURN_CODE" ]]; then
     then
       if [ ! -z "$OUTPUT_LOG" ] && [ ! -z "$HC_LOG" ] && [ -f "$LOG_FILE" ]
       then
