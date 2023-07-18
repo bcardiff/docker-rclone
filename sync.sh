@@ -100,7 +100,6 @@ else
     echo "INFO: Define CHECK_URL with https://healthchecks.io to monitor $RCLONE_CMD job"
   else
     if is_success_code "$RETURN_CODE"; then
-    then
       if [ ! -z "$OUTPUT_LOG" ] && [ ! -z "$HC_LOG" ] && [ -f "$LOG_FILE" ]
       then
         echo "INFO: Sending complete signal with logs to healthchecks.io"
