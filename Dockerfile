@@ -26,6 +26,7 @@ ENV HC_LOG=
 ENV TZ=
 ENV UID=
 ENV GID=
+ENV SUCCESS_CODES="0"
 
 RUN apk --no-cache add ca-certificates fuse wget dcron tzdata
 

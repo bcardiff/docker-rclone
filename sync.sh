@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# Function to check if return code is in the success codes list
+is_success_code() {
+  local code=$1
+  for success_code in $SUCCESS_CODES; do
+    if [ "$success_code" = "$code" ]; then
+      return 0  # Match found, return success
+    fi
+  done
+  return 1  # No match found, return failure
+}
+
 echo "INFO: Starting sync.sh pid $$ $(date)"
 
 if [ `lsof | grep $0 | wc -l | tr -d ' '` -gt 1 ]
@@ -88,8 +99,7 @@ else
   then
     echo "INFO: Define CHECK_URL with https://healthchecks.io to monitor $RCLONE_CMD job"
   else
-    if [ "$RETURN_CODE" == 0 ]
-    then
+    if is_success_code "$RETURN_CODE"; then
       if [ ! -z "$OUTPUT_LOG" ] && [ ! -z "$HC_LOG" ] && [ -f "$LOG_FILE" ]
       then
         echo "INFO: Sending complete signal with logs to healthchecks.io"

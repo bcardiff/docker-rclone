@@ -59,6 +59,7 @@ A few environment variables allow you to customize the behavior of rclone:
 * `TZ` set the [timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to use for the cron and log `America/Chicago`
 * `UID` set variable to specify user to run rclone as. Must also use GID.
 * `GID` set variable to specify group to run rclone as. Must also use UID.
+* `SUCCESS_CODES`: set variable to a space-separated list of return codes that are considered successful. If the return code matches any of these codes, the response will be marked as a success. Example: `SUCCESS_CODES="0 8 10"`. Default value is `0`
 
 **When using UID/GID the config and/or logs directory must be writeable by this UID**
 
